@@ -1,14 +1,20 @@
 import React, { Component } from "react";
+import EmployeeService from "../Services/EmployeeService";
 
 class ListEmployeeComponent extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     //The state is a built-in React object that is used to contain data or information about the component.
     //A component's state can change over time; whenever it changes, the component re-renders.
     this.state = {
-      employees: [],
-    };
+      employees: []
+    }
+  }
+  componentDidMount(){
+    EmployeeService.getEmployees().then((res) => {
+      this.setState({employees: res.data})
+    });
   }
 
   render() {
